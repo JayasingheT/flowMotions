@@ -38,6 +38,14 @@
 <style>
 
 
+
+html,
+body{
+    background:#919191;
+    margin:0;
+    padding:0;
+}
+
 /*=========================
 FLOWMOTIONS HERO GLASS
 =========================*/
@@ -829,6 +837,292 @@ transform:translateY(0);
 
 }
 
+/* Footer fix */
+#footer-5-vhtKfx7h3N .glass-section{
+    margin:80px auto 0 !important;   /* top right bottom left */
+    border-radius:35px 35px 0 0;
+}
+
+#footer-5-vhtKfx7h3N{
+    margin:0 !important;
+    padding-bottom:0 !important;
+    
+}
+
+
+#vnwmRFEIcv-modal .modal-dialog{
+  max-width:100vw !important;
+  width:100vw !important;
+  height:100vh !important;
+  margin:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+#vnwmRFEIcv-modal .modal-content{
+  width:90% !important;
+  max-width:90% !important;
+  height:100% !important;
+  margin:0 auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:transparent !important;
+}
+#vnwmRFEIcv-modal .carousel-control-prev{
+  left:0px !important;
+  background:transparent !important;
+}
+
+#vnwmRFEIcv-modal .carousel-control-next{
+  right:0px !important;
+  background:transparent !important;
+}
+
+
+
+
+/* ===== Modal open/close animation ===== */
+#vnwmRFEIcv-modal .modal-dialog{
+  opacity:0;
+  transform:scale(0.92);
+  transition:opacity .35s ease, transform .35s ease;
+}
+#vnwmRFEIcv-modal.show .modal-dialog{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* ===== Gallery thumbnail hover zoom ===== */
+.item-wrapper{
+  overflow:hidden;
+  border-radius:12px;
+}
+.item-wrapper img{
+  transition:transform .5s ease, filter .5s ease;
+}
+.item-wrapper:hover img{
+  transform:scale(1.08);
+  filter:brightness(1.1);
+}
+.icon-wrapper{
+  transition:opacity .35s ease, transform .35s ease;
+  opacity:0;
+  transform:scale(0.8);
+}
+.item-wrapper:hover .icon-wrapper{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* ===== Carousel arrows hover ===== */
+#vnwmRFEIcv-modal .carousel-control-prev-icon,
+#vnwmRFEIcv-modal .carousel-control-next-icon{
+  transition:transform .3s ease, opacity .3s ease;
+  opacity:0.6;
+}
+#vnwmRFEIcv-modal .carousel-control-prev:hover .carousel-control-prev-icon{
+  transform:translateX(-6px);
+  opacity:1;
+}
+#vnwmRFEIcv-modal .carousel-control-next:hover .carousel-control-next-icon{
+  transform:translateX(6px);
+  opacity:1;
+}
+
+/* ===== Close button hover ===== */
+#vnwmRFEIcv-modal .close{
+  transition:transform .35s ease, opacity .3s ease;
+  opacity:0.7;
+}
+#vnwmRFEIcv-modal .close:hover{
+  transform:rotate(90deg) scale(1.15);
+  opacity:1;
+}
+
+/* ===== Carousel slide fade (smoother than default) ===== */
+#vnwmRFEIcv-modal .carousel-item{
+  transition:opacity 1s ease-in-out !important;
+}
+
+/* ===== Nav links underline slide (you already have this, adding a subtle nav shadow lift) ===== */
+#menu-5-vhtKfx4bVu .navbar-brand a{
+  transition:letter-spacing .4s ease;
+}
+#menu-5-vhtKfx4bVu .navbar-brand a:hover{
+  letter-spacing:2px;
+}
+
+/* ===== Social cards subtle float on load ===== */
+.glass-card{
+  animation:cardFadeUp .6s ease both;
+}
+.glass-card:nth-child(2){
+  animation-delay:.15s;
+}
+@keyframes cardFadeUp{
+  from{opacity:0; transform:translateY(25px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/*.........................................................*/
+
+/* ============================================
+   GLOBAL ANIMATIONS PASS
+   ============================================ */
+
+/* ===== Smooth scrolling ===== */
+html{
+  scroll-behavior:smooth;
+}
+
+/* ===== Fade-up utility (used by scroll-reveal JS) ===== */
+.reveal-up{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.reveal-up.reveal-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== Hero section entrance ===== */
+.glass-hero .display-1{
+  animation:heroFadeDown 1s ease both;
+}
+.glass-hero .display-4{
+  animation:heroFadeUp 1s ease .2s both;
+}
+.glass-hero .mbr-section-btn{
+  animation:heroFadeUp 1s ease .4s both;
+}
+@keyframes heroFadeDown{
+  from{opacity:0; transform:translateY(-30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+@keyframes heroFadeUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== Hero button pulse + hover lift already exists via .btn, add glow pulse to Watch Now ===== */
+.btn.btn-success-outline{
+  animation:btnPulse 2.5s ease-in-out infinite;
+}
+@keyframes btnPulse{
+  0%,100%{box-shadow:0 0 0 rgba(255,255,255,0);}
+  50%{box-shadow:0 0 25px rgba(255,255,255,.25);}
+}
+
+/* ===== Marquee row (Captured Moments) — smooth continuous scroll ===== */
+.grid-container-3{
+  animation:marqueeScroll 30s linear infinite;
+}
+.grid-container:hover .grid-container-3{
+  animation-play-state:paused;
+}
+@keyframes marqueeScroll{
+  from{transform:translate3d(0,0,0);}
+  to{transform:translate3d(-25%,0,0);}
+}
+.grid-item img{
+  transition:transform .6s ease, filter .6s ease;
+}
+.grid-item:hover img{
+  transform:scale(1.06);
+  filter:brightness(1.1) saturate(1.15);
+}
+
+
+/* ===== Gallery section heading reveal ===== */
+#gallery01-8 .content-head,
+#gallery07-6 .content-head{
+
+  transform:translateY(25px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+#gallery01-8 .content-head.reveal-visible,
+#gallery07-6 .content-head.reveal-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== About section image + text ===== */
+.article4 .image-wrapper img{
+  transition:transform .6s ease, box-shadow .6s ease;
+  border-radius:30px;
+}
+.article4 .image-wrapper:hover img{
+  transform:scale(1.03) rotate(-0.5deg);
+  box-shadow:0 25px 60px rgba(0,0,0,.4);
+}
+.article4 .text-wrapper{
+  transition:transform .3s ease;
+}
+
+/* ===== Social cards already animate on load; add hover glow pulse ===== */
+.glass-card{
+  will-change:transform;
+}
+.glass-card .icon{
+  transition:transform .4s ease;
+}
+.glass-card:hover .icon{
+  transform:scale(1.2) rotate(-8deg);
+}
+
+
+
+/* ===== Navbar entrance on load ===== */
+#menu-5-vhtKfx4bVu .container{
+  animation:navDrop .8s ease both;
+}
+@keyframes navDrop{
+  from{opacity:0; transform:translateY(-25px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== Preloader logo pulse while loading ===== */
+.loader-logo{
+  animation:loaderFade 1.2s ease, logoGlow 1.6s ease-in-out infinite;
+}
+@keyframes logoGlow{
+  0%,100%{text-shadow:0 0 10px rgba(255,255,255,.2);}
+  50%{text-shadow:0 0 25px rgba(255,255,255,.6);}
+}
+
+/* ===== Section headings — subtle letter-spacing expand on view ===== */
+.mbr-section-title{
+  transition:letter-spacing .6s ease;
+}
+
+/* ===== Respect reduced motion preference ===== */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+/*non clickable*/
+
+#gallery07-6 .mbr-section-title{
+  transition:transform .2000s ease-out;
+  cursor:default;
+  user-select:none;
+  will-change:transform;
+}
+#gallery07-6 .mbr-section-title{
+  cursor:default;
+  user-select:none;
+  will-change:transform;
+  transition:transform .1500s ease-out;
+}
+
+
 
 </style></head>
 <body id="top">
@@ -911,7 +1205,7 @@ transform:translateY(0);
 </section>
 
 
-</section>
+
 <section class="gallery07 cid-vntQlmviOI" data-bs-version="5.1" id="gallery07-6">
 <div class="container-fluid gallery-wrapper">
 <div class="row justify-content-center">
@@ -945,7 +1239,7 @@ transform:translateY(0);
 <div class="row">
 </div>
 </div>
-</section>
+
 <section class="gallery1 mbr-gallery cid-vntWBSy0Kn" data-bs-version="5.1" id="gallery01-8">
 <div class="container glass-section">
 <div class="row justify-content-center">
@@ -1222,7 +1516,7 @@ class="glass-card youtube">
 
 
 
-<section class="footer2 cid-vhtKfx7h3N mbr-parallax-background" data-bs-version="5.1" id="footer-5-vhtKfx7h3N" once="footers">
+<section class="footer2 cid-vhtKfx7h3N" data-bs-version="5.1" id="footer-5-vhtKfx7h3N" once="footers">
 <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);">
 </div>
 <div class="container glass-section">
@@ -1237,6 +1531,18 @@ class="glass-card youtube">
 <script src="assets/theme/js/script.js" defer></script>
 <input name="animation" type="hidden"/>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.modal.mbr-slider').forEach(function (modal) {
+    modal.addEventListener('show.bs.modal', function () {
+      if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+    });
+  });
+});
+</script>
 
 <script id="galleryReplay">
 document.addEventListener("DOMContentLoaded",function(){
@@ -1337,9 +1643,42 @@ document.body.style.overflow="auto";
 
 document.body.style.overflow="hidden";
 
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const title = document.querySelector("#gallery07-6 .mbr-section-title");
+  if(!title) return;
+
+  const DODGE_RADIUS = 700;   // how close the cursor needs to be to trigger movement
+  const MAX_MOVE = 5;        // how far the text can move away, in px
+
+  document.addEventListener("mousemove", function(e){
+    const rect = title.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const dx = centerX - e.clientX;
+    const dy = centerY - e.clientY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if(distance < DODGE_RADIUS){
+      const strength = (1 - distance / DODGE_RADIUS) * MAX_MOVE;
+      const angle = Math.atan2(dy, dx);
+      const moveX = Math.cos(angle) * strength;
+      const moveY = Math.sin(angle) * strength;
+
+      title.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    } else {
+      title.style.transform = "translate(0, 0)";
+    }
+  });
+});
+</script>
 
 
 
-</script></body>
+
+</body>
 </html>
 
