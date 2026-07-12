@@ -90,7 +90,7 @@ rgba(255,255,255,.9),
 transparent
 );
 
-animation:heroLine 8s linear infinite;
+animation:heroLine 4s linear infinite;
 
 }
 
@@ -615,7 +615,7 @@ transform:translateY(0) scale(1);
     background:rgba(18,18,18,.55)!important;
     backdrop-filter:blur(18px);
     border:1px solid rgba(255,255,255,.08);
-    border-radius:60px;
+    border-radius:1000px;
     box-shadow:0 8px 30px rgba(0,0,0,.35);
     transition:.35s;
 }
@@ -623,7 +623,7 @@ transform:translateY(0) scale(1);
     content:"";
     position:absolute;
     inset:0;
-    border-radius:60px;
+    border-radius:100px;
     padding:2px;
     background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
     background-size:250% 100%;
@@ -719,26 +719,15 @@ letter-spacing:10px;
 
 font-weight:700;
 
-color:rgb(144, 144, 144);
+color:#ffffff;
 
 margin-bottom:15px;
 
-background:linear-gradient(
-90deg,
-#000000,
-rgb(150, 150, 150),
-#ffffff
-#bababa
-#484848
-);
+background:none;
 
-background-size:300%;
+-webkit-background-clip:unset;
 
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-animation:logoShine 3s linear infinite;
+-webkit-text-fill-color:#ffffff;
 
 }
 
@@ -859,12 +848,12 @@ transform:translateY(0);
 
     <div class="loader-content">
 
-        <h1 class="loader-logo">
-            FLOWMOTIONS
-        </h1>
+        <p class="loader-logo">
+            <em style="font-weight: bold; font-family: 'Monaco', 'Trebuchet MS';color: #ffffff; font-size: 30px; letter-spacing: 10px;">FLOWMOTIONS</em>
+        </p>
 
         <p class="loader-text">
-            Preparing Your Journey...
+            <em style="font-weight: bold; font-family: 'Monaco', 'Trebuchet MS';">Preparing Your Journey...</em>
         </p>
 
         <div class="loader-bar">
@@ -911,8 +900,8 @@ transform:translateY(0);
 <div class="container">
 <div class="row">
 <div class="content-wrap col-12 col-md-12 glass-hero">
-<h3 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1"><strong>Experience the Sky</strong></h3>
-<p class="mbr-fonts-style mbr-text mbr-white mb-4 display-4"><em style="font-weight: bold;">Experience the beauty of Sri Lanka from a unique perspective</em></p>
+<h3 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1"><em style="font-weight: bold; font-family: 'Monaco', 'Trebuchet MS';">Experience the Sky</h3>
+<p class="mbr-fonts-style mbr-text mbr-white mb-4 display-4"><em style="font-weight: bold; font-family: 'Monaco', 'Trebuchet MS';">Experience the beauty of Sri Lanka from a unique perspective</em></p>
 <p class="credit-text">
 </p>
 <div class="mbr-section-btn"><a class="btn btn-success-outline display-7" href="index.html#gallery01-8">Watch Now</a></div>
@@ -929,7 +918,7 @@ transform:translateY(0);
 <div class="col-12 content-head">
 <div class="mbr-section-head mb-5">
 <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-<strong>Captured Moments </strong></h4>
+<em style="font-weight: bold; font-family: 'impactBahnschrift SemiBold', 'Trebuchet MS';">Captured Moments</em></h4>
 </div>
 </div>
 </div>
@@ -962,7 +951,7 @@ transform:translateY(0);
 <div class="row justify-content-center">
 <div class="col-12 content-head">
 <div class="mb-5">
-<h3 class="mbr-section-title mbr-fonts-style align-center m-0 display-2"><strong>Gallery</strong></h3>
+<h3 class="mbr-section-title mbr-fonts-style align-center m-0 display-2"><em style="font-family: 'impactBahnschrift SemiBold', 'Trebuchet MS';letter-spacing: 3px;font-size: 60px;">Gallery</em></h3>
 <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-4">High Resolution images , Image loading speed depends on your connection speed.</h4>
 </div>
 </div>
@@ -1149,7 +1138,7 @@ transform:translateY(0);
 <p class="mbr-text mbr-fonts-style mb-3 display-8"></p>
 <p class="mbr-text mbr-fonts-style mb-3 display-8">I am an NVQ Certified Drone Pilot with a passion for aerial cinematography, drone photography, and cinematic storytelling. Through Flowmotions, I create high-quality aerial visuals that help businesses, tourism brands, real estate companies, hotels, and content creators showcase their stories from a unique perspective.Follow my journey: @jayasinghe404</p><br/>
 
-Flowmotions.lk - Elevating Stories, One Flight at a Time.
+    Flowmotions.lk - Elevating Stories, One Flight at a Time.
 					
 				</div>
 </div>
@@ -1219,12 +1208,15 @@ class="glass-card youtube">
 <div class="arrow">→</div>
 
 </a>
-
+<em style="word-spacing: 50px;">flowmotions.cine@gmail.com</em>
 </div>
 
 </div>
 
 </div>
+
+   
+
 
 </section>
 
