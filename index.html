@@ -38,7 +38,92 @@
 <style>
 
 
+/*=========================
+FLOWMOTIONS HERO GLASS
+=========================*/
 
+.glass-hero{
+
+max-width:850px;
+
+margin:auto;
+
+padding:70px 60px;
+
+background:rgba(18,18,18,.28);
+
+backdrop-filter:blur(24px);
+-webkit-backdrop-filter:blur(24px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:35px;
+
+box-shadow:
+0 25px 80px rgba(0,0,0,.45),
+inset 0 1px rgba(255,255,255,.08);
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.glass-hero::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-150%;
+
+width:200%;
+
+height:2px;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.9),
+transparent
+);
+
+animation:heroLine 8s linear infinite;
+
+}
+
+@keyframes heroLine{
+
+0%{
+left:-150%;
+}
+
+100%{
+left:150%;
+}
+
+}
+
+
+.glass-hero{
+
+text-align:center;
+
+}
+
+
+.glass-hero .display-1{
+
+font-size:clamp(2rem,5vw,3rem);
+
+letter-spacing:-2px;
+
+text-shadow:
+0 0 35px rgba(255,255,255,.12);
+
+}
 
 
 
@@ -823,7 +908,7 @@ transform:translateY(0);
 <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(5, 10, 10);"></div>
 <div class="container">
 <div class="row">
-<div class="content-wrap col-12 col-md-12">
+<div class="content-wrap col-12 col-md-12 glass-hero">
 <h3 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1"><strong>Experience the Sky</strong></h3>
 <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-4"><em style="font-weight: bold;">Experience the beauty of Sri Lanka from a unique perspective</em></p>
 <p class="credit-text">
@@ -1153,9 +1238,17 @@ class="glass-card youtube">
 </div>
 </div>
 </div>
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script> <script src="assets/parallax/jarallax.js"></script> <script src="assets/smoothscroll/smooth-scroll.js"></script> <script src="assets/ytplayer/index.js"></script> <script src="assets/dropdown/js/navbar-dropdown.js"></script> <script src="assets/scrollgallery/scroll-gallery.js"></script> <script src="assets/theme/js/script.js"></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/parallax/jarallax.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script> 
+ 
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>  
+<script src="assets/scrollgallery/scroll-gallery.js"></script> 
+<script src="assets/theme/js/script.js"></script>
 <input name="animation" type="hidden"/>
-</section><script id="galleryReplay">
+</section>
+
+<script id="galleryReplay">
 document.addEventListener("DOMContentLoaded",function(){
 
 const observer=new IntersectionObserver(function(entries){
@@ -1238,7 +1331,7 @@ window.addEventListener('scroll',()=>{
 
 
 
-window.addEventListener("load",()=>{
+window.addEventListener("DOMContentLoaded",()=>{
 
 const loader=document.getElementById("preloader");
 
