@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8e8e8"/>
+      <stop offset="50%" stop-color="#9d9d9d"/>
+      <stop offset="100%" stop-color="#e8e8e8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="94" fill="#0d0d0d"/>
+  <circle cx="100" cy="100" r="94" fill="none" stroke="url(#ringGrad)" stroke-width="4"/>
+  <line x1="58" y1="58" x2="142" y2="142" stroke="#e8e8e8" stroke-width="5"/>
+  <line x1="142" y1="58" x2="58" y2="142" stroke="#e8e8e8" stroke-width="5"/>
+  <circle cx="58" cy="58" r="26" fill="none" stroke="#e8e8e8" stroke-width="5"/>
+  <circle cx="142" cy="58" r="26" fill="none" stroke="#e8e8e8" stroke-width="5"/>
+  <circle cx="58" cy="142" r="26" fill="none" stroke="#e8e8e8" stroke-width="5"/>
+  <circle cx="142" cy="142" r="26" fill="none" stroke="#e8e8e8" stroke-width="5"/>
+  <rect x="82" y="82" width="36" height="36" rx="6" fill="#e8e8e8"/>
+</svg>
