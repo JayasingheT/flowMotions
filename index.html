@@ -1265,6 +1265,107 @@ html{
 
 
 
+.golden-card{
+
+margin-top:35px;
+
+padding:28px;
+
+border-radius:24px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+}
+
+.golden-header{
+
+font-size:14px;
+
+letter-spacing:3px;
+
+color:#ffce58;
+
+margin-bottom:20px;
+
+}
+
+.golden-grid{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:20px;
+
+}
+
+.golden-label{
+
+font-size:13px;
+
+opacity:.7;
+
+}
+
+.golden-grid h3{
+
+margin-top:6px;
+
+font-size:24px;
+
+}
+
+.countdown{
+
+text-align:center;
+
+}
+
+.countdown p{
+
+opacity:.7;
+
+margin-bottom:8px;
+
+}
+
+#goldenCountdown{
+
+font-size:38px;
+
+color:#ffd86b;
+
+font-weight:700;
+
+letter-spacing:3px;
+
+}
+
+@media(max-width:768px){
+
+.golden-grid{
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+#goldenCountdown{
+
+font-size:28px;
+
+}
+
+}
+
+
+
+
 
 </style></head>
 <body id="top">
@@ -1389,7 +1490,40 @@ html{
       <span id="flight-status-text">Checking flight conditions...</span>
     </div>
   </div>
+  <div class="golden-card">
+
+    <div class="golden-header">
+        🌅 GOLDEN HOUR
+    </div>
+
+    <div class="golden-grid">
+
+        <div>
+            <span class="golden-label">Sunrise</span>
+            <h3 id="sunriseTime">--:--</h3>
+        </div>
+
+        <div>
+            <span class="golden-label">Sunset</span>
+            <h3 id="sunsetTime">--:--</h3>
+        </div>
+
+    </div>
+
+    <div class="countdown">
+
+        <p>Next Golden Hour</p>
+
+        <h2 id="goldenCountdown">
+            00:00:00
+        </h2>
+
+    </div>
+
+</div>
 </section>
+
+
 
 
 
@@ -1914,25 +2048,93 @@ document.addEventListener("DOMContentLoaded", function(){
   // Default fallback: Colombo, Sri Lanka
   const FALLBACK = { lat: 6.9271, lon: 79.8612, name: "Colombo, Sri Lanka" };
 
-  function loadWeather(lat, lon, locationName){
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,precipitation_probability,cloud_cover&timezone=auto&models=ecmwf_ifs025`;
+function loadWeather(lat, lon, locationName){
+
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,precipitation_probability,cloud_cover&daily=sunrise,sunset&timezone=auto&models=ecmwf_ifs025`;
+
     fetch(url)
-      .then(res => res.json())
-      .then(data => {
+    .then(res => res.json())
+    .then(data => {
+
         const c = data.current;
+
         document.getElementById("weather-location").textContent = locationName;
         document.getElementById("w-temp").textContent = `${Math.round(c.temperature_2m)}°C`;
         document.getElementById("w-wind").textContent = `${Math.round(c.wind_speed_10m)} m/s`;
         document.getElementById("w-rain").textContent = `${c.precipitation_probability ?? 0}%`;
         document.getElementById("w-cloud").textContent = `${c.cloud_cover ?? 0}%`;
 
-        updateFlightStatus(c.wind_speed_10m, c.precipitation_probability ?? 0, c.cloud_cover ?? 0);
-      })
-      .catch(() => {
+        updateFlightStatus(
+            c.wind_speed_10m,
+            c.precipitation_probability ?? 0,
+            c.cloud_cover ?? 0
+        );
+
+        // ---------- Golden Hour ----------
+        const sunrise = new Date(data.daily.sunrise[0]);
+        const sunset  = new Date(data.daily.sunset[0]);
+
+        document.getElementById("sunriseTime").textContent =
+            sunrise.toLocaleTimeString([],{
+                hour:"2-digit",
+                minute:"2-digit"
+            });
+
+        document.getElementById("sunsetTime").textContent =
+            sunset.toLocaleTimeString([],{
+                hour:"2-digit",
+                minute:"2-digit"
+            });
+
+        function updateGoldenCountdown(){
+
+            const now = new Date();
+
+            let target;
+
+            if(now < sunrise){
+
+                target = sunrise;
+
+            }else if(now < sunset){
+
+                target = sunset;
+
+            }else{
+
+                target = new Date(sunrise);
+                target.setDate(target.getDate()+1);
+
+            }
+
+            const diff = target - now;
+
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById("goldenCountdown").textContent =
+                `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+        }
+
+        updateGoldenCountdown();
+
+        if(window.goldenTimer){
+            clearInterval(window.goldenTimer);
+        }
+
+        window.goldenTimer = setInterval(updateGoldenCountdown,1000);
+
+    })
+    .catch(() => {
+
         document.getElementById("weather-location").textContent = "Weather unavailable";
         document.getElementById("flight-status-text").textContent = "Unable to load conditions";
-      });
-  }
+
+    });
+
+}
 
   function updateFlightStatus(wind, rainChance, cloud){
     const statusEl = document.getElementById("flight-status");
@@ -2014,7 +2216,16 @@ observer.unobserve(counter);
 },{threshold:.5});
 
 counters.forEach(counter=>observer.observe(counter));
+
 </script>
+
+
+
+
+
+
+
+
 
 
 </body>
