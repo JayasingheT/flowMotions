@@ -192,37 +192,31 @@ overflow:hidden;
 }
 
 .glass-section::before{
-
-content:"";
-
-position:absolute;
-
-left:-150%;
-
-top:0;
-
-width:200%;
-
-height:2px;
-
-background:linear-gradient(
-90deg,
-transparent,
-white,
-transparent
-);
-
-animation:glassLine 8s linear infinite;
-
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:200%;
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    white,
+    transparent
+  );
+  transform:translateX(-75%);
+  will-change:transform;
+  animation:glassLine 8s linear infinite;
+  pointer-events:none;
+  isolation:isolate;
+  transform:translateZ(0);
 }
 
 @keyframes glassLine{
-
-0%{left:-150%;}
-
-100%{left:150%;}
-
+  0%{transform:translateX(-75%);}
+  100%{transform:translateX(75%);}
 }
+
 
 
 
@@ -1123,6 +1117,72 @@ html{
 }
 
 
+#flight-conditions.glass-section{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  background:rgba(52, 52, 52, 0.55) !important;
+}
+
+
+.weather-grid{
+  display:flex;
+  justify-content:center;
+  align-items:stretch;
+  gap:15px;
+  flex-wrap:nowrap;
+  margin-bottom:30px;
+  overflow-x:auto;
+}
+.weather-card{
+  flex:1;
+  min-width:120px;
+  max-width:160px;
+  padding:18px 10px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  text-align:center;
+  transition:transform .3s ease, border-color .3s ease;
+}
+.weather-card:hover{
+  transform:translateY(-6px);
+  border-color:#fff;
+}
+.w-icon{
+  font-size:26px;
+  margin-bottom:6px;
+}
+.w-value{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:3px;
+}
+.w-label{
+  font-size:11px;
+  color:#9d9d9d;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+@media(max-width:600px){
+  .weather-grid{
+    flex-wrap:nowrap;
+  }
+  .weather-card{
+    min-width:100px;
+    padding:14px 8px;
+  }
+  .w-value{
+    font-size:16px;
+  }
+  .w-icon{
+    font-size:20px;
+  }
+}
+
+
+
+
 
 </style></head>
 <body id="top">
@@ -1203,6 +1263,53 @@ html{
 </div>
 </div>
 </section>
+
+
+
+
+<section id="flight-conditions" class="glass-section">
+  <div class="container">
+    <div class="weather-heading">
+      <span>LIVE CONDITIONS</span>
+      <h2>Flight Weather</h2>
+      <p id="weather-location">Detecting location...</p>
+      <p style="text-align:center;margin-top:15px;">
+  <a href="https://www.windy.com" target="_blank" rel="noopener" style="color:#9d9d9d;font-size:13px;">
+    Cross-check on Windy →
+  </a>
+</p>
+    </div>
+
+    <div class="weather-grid" id="weather-grid">
+      <div class="weather-card">
+        <div class="w-icon" id="w-temp-icon">🌡️</div>
+        <div class="w-value" id="w-temp">--°C</div>
+        <div class="w-label">Temperature</div>
+      </div>
+      <div class="weather-card">
+        <div class="w-icon" id="w-wind-icon">💨</div>
+        <div class="w-value" id="w-wind">-- m/s</div>
+        <div class="w-label">Wind Speed</div>
+      </div>
+      <div class="weather-card">
+        <div class="w-icon" id="w-rain-icon">☔</div>
+        <div class="w-value" id="w-rain">--%</div>
+        <div class="w-label">Rain Chance</div>
+      </div>
+      <div class="weather-card">
+        <div class="w-icon" id="w-cloud-icon">☁️</div>
+        <div class="w-value" id="w-cloud">--%</div>
+        <div class="w-label">Cloud Cover</div>
+      </div>
+    </div>
+
+    <div class="flight-status" id="flight-status">
+      <span id="flight-status-text">Checking flight conditions...</span>
+    </div>
+  </div>
+</section>
+
+
 
 
 
@@ -1673,6 +1780,67 @@ document.addEventListener("DOMContentLoaded", function(){
       title.style.transform = "translate(0, 0)";
     }
   });
+});
+</script>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  // Default fallback: Colombo, Sri Lanka
+  const FALLBACK = { lat: 6.9271, lon: 79.8612, name: "Colombo, Sri Lanka" };
+
+  function loadWeather(lat, lon, locationName){
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,precipitation_probability,cloud_cover&timezone=auto&models=ecmwf_ifs025`;
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        const c = data.current;
+        document.getElementById("weather-location").textContent = locationName;
+        document.getElementById("w-temp").textContent = `${Math.round(c.temperature_2m)}°C`;
+        document.getElementById("w-wind").textContent = `${Math.round(c.wind_speed_10m)} m/s`;
+        document.getElementById("w-rain").textContent = `${c.precipitation_probability ?? 0}%`;
+        document.getElementById("w-cloud").textContent = `${c.cloud_cover ?? 0}%`;
+
+        updateFlightStatus(c.wind_speed_10m, c.precipitation_probability ?? 0, c.cloud_cover ?? 0);
+      })
+      .catch(() => {
+        document.getElementById("weather-location").textContent = "Weather unavailable";
+        document.getElementById("flight-status-text").textContent = "Unable to load conditions";
+      });
+  }
+
+  function updateFlightStatus(wind, rainChance, cloud){
+    const statusEl = document.getElementById("flight-status");
+    const textEl = document.getElementById("flight-status-text");
+
+    // Common drone flying thresholds (adjust to your drone's specs)
+    // Most consumer drones: safe below ~25-30 km/h wind, avoid rain entirely
+    if(rainChance > 40 || wind > 35){
+      statusEl.className = "flight-status bad";
+      textEl.textContent = "⚠️ Not Recommended for Flying";
+    } else if(wind > 20 || rainChance > 15 || cloud > 80){
+      statusEl.className = "flight-status caution";
+      textEl.textContent = "⚠️ Caution — Marginal Conditions";
+    } else {
+      statusEl.className = "flight-status good";
+      textEl.textContent = "✅ Good Conditions for Flying";
+    }
+  }
+
+  // Try browser geolocation first, fall back to Colombo
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(
+      pos => loadWeather(pos.coords.latitude, pos.coords.longitude, "Your Location"),
+      () => loadWeather(FALLBACK.lat, FALLBACK.lon, FALLBACK.name),
+      { timeout: 5000 }
+    );
+  } else {
+    loadWeather(FALLBACK.lat, FALLBACK.lon, FALLBACK.name);
+  }
+
 });
 </script>
 
