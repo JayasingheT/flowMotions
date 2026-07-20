@@ -1183,6 +1183,89 @@ html{
 
 
 
+.flight-section{
+    padding:90px 20px;
+    text-align:center;
+}
+
+.flight-subtitle{
+    color:#f9c57d;
+    font-size:14px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+.flight-title{
+    font-size:52px;
+    margin:10px 0;
+    color:#fff;
+}
+
+.flight-desc{
+    color:#bdbdbd;
+    margin-bottom:50px;
+}
+
+.flight-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.flight-card{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:35px 20px;
+    transition:.4s;
+}
+
+.flight-card:hover{
+    transform:translateY(-10px);
+    border-color:#ff5e00;
+    box-shadow:0 20px 50px rgba(255, 187, 0, 0.203);
+}
+
+.flight-icon{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.flight-card h3{
+    font-size:42px;
+    color:#fff;
+    margin:10px 0;
+}
+
+.flight-card p{
+    color:#cfcfcf;
+    letter-spacing:1px;
+}
+
+@media(max-width:768px){
+
+.flight-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.flight-card{
+    padding:25px 15px;
+}
+
+.flight-title{
+    font-size:36px;
+}
+
+.flight-card h3{
+    font-size:30px;
+}
+
+}
+
+
+
+
 </style></head>
 <body id="top">
 <!-- Analytics -->
@@ -1545,6 +1628,46 @@ html{
 </div>
 </div>
 </section>
+
+<section class="flight-section glass-section">
+
+    <div class="flight-header">
+        <span class="flight-subtitle">FLOWMOTIONS STATS</span>
+        <h2 class="flight-title">Flight Statistics</h2>
+        <p class="flight-desc">Years of aerial exploration across Sri Lanka.</p>
+    </div>
+
+    <div class="flight-grid">
+
+        <div class="flight-card">
+            <div class="flight-icon">✈️</div>
+            <h3 class="counter" data-target="147">0</h3>
+            <p>Total Flights</p>
+        </div>
+
+        <div class="flight-card">
+            <div class="flight-icon">⏱️</div>
+            <h3 class="counter" data-target="132">0</h3>
+            <p>Flight Hours</p>
+        </div>
+
+        <div class="flight-card">
+            <div class="flight-icon">📍</div>
+            <h3 class="counter" data-target="158">0</h3>
+            <p>Distance (km)</p>
+        </div>
+
+        <div class="flight-card">
+            <div class="flight-icon">📸</div>
+            <h3 class="counter" data-target="1120">0</h3>
+            <p>Photos Captured</p>
+        </div>
+
+    </div>
+
+</section>
+
+
 <section class="image02 cid-vhtKfx60Zw mbr-parallax-background" data-bs-version="5.1" id="image-13-vhtKfx60Zw">
 <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(0, 0, 0);"></div>
 <div class="container">
@@ -1844,6 +1967,54 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 
 
+
+<script>
+const counters=document.querySelectorAll(".counter");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const counter=entry.target;
+
+const target=+counter.dataset.target;
+
+let current=0;
+
+const increment=Math.max(1,Math.ceil(target/120));
+
+const update=()=>{
+
+current+=increment;
+
+if(current<target){
+
+counter.innerText=current.toLocaleString();
+
+requestAnimationFrame(update);
+
+}else{
+
+counter.innerText=target.toLocaleString();
+
+}
+
+};
+
+update();
+
+observer.unobserve(counter);
+
+}
+
+});
+
+},{threshold:.5});
+
+counters.forEach(counter=>observer.observe(counter));
+</script>
 
 
 </body>
