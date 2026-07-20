@@ -1150,29 +1150,36 @@ html{
 @media (max-width:768px){
 
 .weather-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(140px,1fr));
+    gap:18px;
+    justify-content:center;
 }
 
 .weather-card{
-    min-height:130px;
-    padding:15px 10px;
+    min-height:170px;
+    padding:20px 14px;
 }
 
 .w-icon{
-    font-size:24px;
+    font-size:30px;
 }
 
 .w-value{
-    font-size:18px;
+    font-size:22px;
+    line-height:1.2;
 }
 
 .w-label{
-    font-size:12px;
+    font-size:15px;
+    line-height:1.3;
+    word-break:keep-all;
 }
-
+.weather-grid{
+    max-width:340px;
+    margin:35px auto;
 }
-
+}
 
 
 
@@ -1276,22 +1283,22 @@ html{
       <div class="weather-card">
         <div class="w-icon" id="w-temp-icon">🌡️</div>
         <div class="w-value" id="w-temp">--°C</div>
-        <div class="w-label">Temperature</div>
+        <div class="w-label">Temp</div>
       </div>
       <div class="weather-card">
         <div class="w-icon" id="w-wind-icon">💨</div>
         <div class="w-value" id="w-wind">-- m/s</div>
-        <div class="w-label">Wind Speed</div>
+        <div class="w-label">Wind</div>
       </div>
       <div class="weather-card">
         <div class="w-icon" id="w-rain-icon">☔</div>
         <div class="w-value" id="w-rain">--%</div>
-        <div class="w-label">Rain Chance</div>
+        <div class="w-label">Rain</div>
       </div>
       <div class="weather-card">
         <div class="w-icon" id="w-cloud-icon">☁️</div>
         <div class="w-value" id="w-cloud">--%</div>
-        <div class="w-label">Cloud Cover</div>
+        <div class="w-label">Cloud</div>
       </div>
     </div>
 
