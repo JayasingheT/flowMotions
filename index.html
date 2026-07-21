@@ -2,8 +2,8 @@
 
 <html lang="en">
 <head>
+  <meta name="google-site-verification" content="vcNB2ekrt0d88tNezifN05sVceVccZGvPMyb8MnG2fQ" />
 <meta charset="utf-8"/>
-	<meta name="google-site-verification" content="vcNB2ekrt0d88tNezifN05sVceVccZGvPMyb8MnG2fQ" />
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="Mobirise v6.1.12, mobirise.com" name="generator"/>
 <meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport"/><meta name="theme-color" content="#000000"/><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2070,14 +2070,32 @@ class="glass-card youtube">
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.modal.mbr-slider').forEach(function (modal) {
-    modal.addEventListener('show.bs.modal', function () {
-      if (modal.parentElement !== document.body) {
-        document.body.appendChild(modal);
+document.addEventListener("DOMContentLoaded", function(){
+
+  const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+  if(isTouchDevice){
+
+    // Fully stop the cursor-glow animation loop (not just hide it)
+    window.stopCursorGlow = true;
+
+    const style = document.createElement("style");
+    style.textContent = `
+      body::before{ display:none !important; }
+      .glass-hero, .glass-section, .glass-social, .flight-card, .golden-card{
+        backdrop-filter:none !important;
+        -webkit-backdrop-filter:none !important;
       }
-    });
-  });
+    `;
+    document.head.appendChild(style);
+
+    const dodgeTitle = document.querySelector("#gallery07-6 .mbr-section-title");
+    if(dodgeTitle){
+      dodgeTitle.style.transform = "translate(0,0)";
+    }
+
+  }
+
 });
 </script>
 
@@ -2130,15 +2148,24 @@ if (supportsHover) {
     mouseY = e.clientY;
   });
 
-  function animateCursor() {
-    currentX += (mouseX - currentX) * 0.12;
-    currentY += (mouseY - currentY) * 0.12;
-    document.body.style.setProperty('--mouse-x', currentX + 'px');
-    document.body.style.setProperty('--mouse-y', currentY + 'px');
+  function animateCursor(){
+
+    if(window.stopCursorGlow){
+        return; // stop the loop entirely on touch devices
+    }
+
+    currentX += (mouseX-currentX)*0.12;
+    currentY += (mouseY-currentY)*0.12;
+
+    document.body.style.setProperty("--mouse-x",currentX+"px");
+    document.body.style.setProperty("--mouse-y",currentY+"px");
+
     requestAnimationFrame(animateCursor);
-  }
+
+}
 
   animateCursor();
+
 }
 </script>
 
