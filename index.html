@@ -11,7 +11,6 @@
 <title>Flowmotions.lk | Theekshana Jayasinghe (Jayasinghe404) | Drone Cinematography Sri Lanka</title>
 <link href="assets/web/assets/mobirise-icons2/mobirise2.css" rel="stylesheet"/>
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="assets/parallax/jarallax.css" rel="stylesheet"/>
 <link href="assets/animatecss/animate.css" rel="stylesheet"/>
 <link href="assets/dropdown/css/style.css" rel="stylesheet"/>
 <link href="assets/socicon/css/styles.css" rel="stylesheet"/>
@@ -1603,7 +1602,7 @@ font-size:28px;
 </div>
 </nav>
 </section>
-<section class="header18 cid-vhtKfx51de mbr-fullscreen mbr-parallax-background" data-bs-version="4.1" id="hero-15-vhtKfx51de">
+<section class="header18 cid-vhtKfx51de mbr-fullscreen" data-bs-version="4.1" id="hero-15-vhtKfx51de">
 <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(5, 10, 10);"></div>
 <div class="container">
 <div class="row">
@@ -1907,7 +1906,7 @@ font-size:28px;
 </div>
 </div>
 </section>
-<section class="header18 cid-vnwiCueUB7 mbr-parallax-background" data-bs-version="5.1" id="header18-d">
+<section class="header18 cid-vnwiCueUB7" data-bs-version="5.1" id="header18-d">
 <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(0, 0, 0);"></div>
 <div class="container-fluid">
 <div class="row">
@@ -1976,7 +1975,7 @@ font-size:28px;
 </section>
 
 
-<section class="image02 cid-vhtKfx60Zw mbr-parallax-background" data-bs-version="5.1" id="image-13-vhtKfx60Zw">
+<section class="image02 cid-vhtKfx60Zw" data-bs-version="5.1" id="image-13-vhtKfx60Zw">
 <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(0, 0, 0);"></div>
 <div class="container">
 <div class="row"></div>
@@ -2117,34 +2116,29 @@ observer.observe(item);
 
 
 <script>
+const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-let mouseX = window.innerWidth/2;
-let mouseY = window.innerHeight/2;
+if (supportsHover) {
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let currentX = mouseX;
+  let currentY = mouseY;
 
-let currentX = mouseX;
-let currentY = mouseY;
-
-document.addEventListener("mousemove",(e)=>{
-
+  document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+  });
 
-});
-
-function animateCursor(){
-
-    currentX += (mouseX-currentX)*0.12;
-    currentY += (mouseY-currentY)*0.12;
-
-    document.body.style.setProperty("--mouse-x",currentX+"px");
-    document.body.style.setProperty("--mouse-y",currentY+"px");
-
+  function animateCursor() {
+    currentX += (mouseX - currentX) * 0.12;
+    currentY += (mouseY - currentY) * 0.12;
+    document.body.style.setProperty('--mouse-x', currentX + 'px');
+    document.body.style.setProperty('--mouse-y', currentY + 'px');
     requestAnimationFrame(animateCursor);
+  }
 
+  animateCursor();
 }
-
-animateCursor();
-
 </script>
 
 
@@ -2184,11 +2178,13 @@ document.body.style.overflow="hidden";
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
   const title = document.querySelector("#gallery07-6 .mbr-section-title");
   if(!title) return;
 
-  const DODGE_RADIUS = 700;   // how close the cursor needs to be to trigger movement
-  const MAX_MOVE = 5;        // how far the text can move away, in px
+  const DODGE_RADIUS = 700;
+  const MAX_MOVE = 5;
 
   document.addEventListener("mousemove", function(e){
     const rect = title.getBoundingClientRect();
@@ -2217,125 +2213,107 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
+function startWeather() {
+  const FALLBACK = { lat: 6.9271, lon: 79.8612, name: 'Colombo, Sri Lanka' };
 
-  // Default fallback: Colombo, Sri Lanka
-  const FALLBACK = { lat: 6.9271, lon: 79.8612, name: "Colombo, Sri Lanka" };
-
-function loadWeather(lat, lon, locationName){
-const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,precipitation_probability,cloud_cover&daily=sunrise,sunset&timezone=auto&models=ecmwf_ifs025&wind_speed_unit=ms`;    fetch(url)
-    .then(res => res.json())
-    .then(data => {
-
+  function loadWeather(lat, lon, locationName) {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,precipitation_probability,cloud_cover&daily=sunrise,sunset&timezone=auto&models=ecmwf_ifs025&wind_speed_unit=ms`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
         const c = data.current;
+        document.getElementById('weather-location').textContent = locationName;
+        document.getElementById('w-temp').textContent = `${Math.round(c.temperature_2m)}°C`;
+        document.getElementById('w-wind').textContent = `${c.wind_speed_10m.toFixed(1)} m/s`;
+        document.getElementById('w-rain').textContent = `${c.precipitation_probability ?? 0}%`;
+        document.getElementById('w-cloud').textContent = `${c.cloud_cover ?? 0}%`;
 
-        document.getElementById("weather-location").textContent = locationName;
-        document.getElementById("w-temp").textContent = `${Math.round(c.temperature_2m)}°C`;
-        document.getElementById("w-wind").textContent = `${c.wind_speed_10m.toFixed(1)} m/s`;
-        document.getElementById("w-rain").textContent = `${c.precipitation_probability ?? 0}%`;
-        document.getElementById("w-cloud").textContent = `${c.cloud_cover ?? 0}%`;
+        updateFlightStatus(c.wind_speed_10m, c.precipitation_probability ?? 0, c.cloud_cover ?? 0);
 
-        updateFlightStatus(
-            c.wind_speed_10m,
-            c.precipitation_probability ?? 0,
-            c.cloud_cover ?? 0
-        );
-
-        // ---------- Golden Hour ----------
         const sunrise = new Date(data.daily.sunrise[0]);
-        const sunset  = new Date(data.daily.sunset[0]);
+        const sunset = new Date(data.daily.sunset[0]);
 
-        document.getElementById("sunriseTime").textContent =
-            sunrise.toLocaleTimeString([],{
-                hour:"2-digit",
-                minute:"2-digit"
-            });
+        document.getElementById('sunriseTime').textContent = sunrise.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
 
-        document.getElementById("sunsetTime").textContent =
-            sunset.toLocaleTimeString([],{
-                hour:"2-digit",
-                minute:"2-digit"
-            });
+        document.getElementById('sunsetTime').textContent = sunset.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
 
-        function updateGoldenCountdown(){
+        function updateGoldenCountdown() {
+          const now = new Date();
+          let target;
 
-            const now = new Date();
+          if (now < sunrise) {
+            target = sunrise;
+          } else if (now < sunset) {
+            target = sunset;
+          } else {
+            target = new Date(sunrise);
+            target.setDate(target.getDate() + 1);
+          }
 
-            let target;
+          const diff = target - now;
+          const h = Math.floor(diff / 3600000);
+          const m = Math.floor((diff % 3600000) / 60000);
+          const s = Math.floor((diff % 60000) / 1000);
 
-            if(now < sunrise){
-
-                target = sunrise;
-
-            }else if(now < sunset){
-
-                target = sunset;
-
-            }else{
-
-                target = new Date(sunrise);
-                target.setDate(target.getDate()+1);
-
-            }
-
-            const diff = target - now;
-
-            const h = Math.floor(diff / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-
-            document.getElementById("goldenCountdown").textContent =
-                `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-
+          document.getElementById('goldenCountdown').textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
 
         updateGoldenCountdown();
 
-        if(window.goldenTimer){
-            clearInterval(window.goldenTimer);
+        if (window.goldenTimer) {
+          clearInterval(window.goldenTimer);
         }
 
-        window.goldenTimer = setInterval(updateGoldenCountdown,1000);
-
-    })
-    .catch(() => {
-
-        document.getElementById("weather-location").textContent = "Weather unavailable";
-        document.getElementById("flight-status-text").textContent = "Unable to load conditions";
-
-    });
-
-}
-
- function updateFlightStatus(wind, rainChance, cloud){
-  const statusEl = document.getElementById("flight-status");
-  const textEl = document.getElementById("flight-status-text");
-
-  // Thresholds now in m/s (35 km/h ≈ 9.7 m/s, 20 km/h ≈ 5.6 m/s)
-  if(rainChance > 65 || wind > 10.0){
-    statusEl.className = "flight-status bad";
-    textEl.textContent = "⚠️ Not Recommended for Flying";
-  } else if(wind > 8.0 || rainChance > 40 || cloud > 75){
-    statusEl.className = "flight-status caution";
-    textEl.textContent = "⚠️ Caution — Marginal Conditions  (Keep your VlOS in mind)";
-  } else {
-    statusEl.className = "flight-status good";
-    textEl.textContent = "✅ Good Conditions for Flying  (Keep your VlOS in mind)";
+        window.goldenTimer = setInterval(updateGoldenCountdown, 1000);
+      })
+      .catch(() => {
+        document.getElementById('weather-location').textContent = 'Weather unavailable';
+        document.getElementById('flight-status-text').textContent = 'Unable to load conditions';
+      });
   }
-}
 
-  // Try browser geolocation first, fall back to Colombo
-  if(navigator.geolocation){
+  function updateFlightStatus(wind, rainChance, cloud) {
+    const statusEl = document.getElementById('flight-status');
+    const textEl = document.getElementById('flight-status-text');
+
+    if (rainChance > 65 || wind > 10.0) {
+      statusEl.className = 'flight-status bad';
+      textEl.textContent = '⚠️ Not Recommended for Flying';
+    } else if (wind > 8.0 || rainChance > 40 || cloud > 75) {
+      statusEl.className = 'flight-status caution';
+      textEl.textContent = '⚠️ Caution — Marginal Conditions  (Keep your VlOS in mind)';
+    } else {
+      statusEl.className = 'flight-status good';
+      textEl.textContent = '✅ Good Conditions for Flying  (Keep your VlOS in mind)';
+    }
+  }
+
+  if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      pos => loadWeather(pos.coords.latitude, pos.coords.longitude, "Your Location"),
+      (pos) => loadWeather(pos.coords.latitude, pos.coords.longitude, 'Your Location'),
       () => loadWeather(FALLBACK.lat, FALLBACK.lon, FALLBACK.name),
       { timeout: 5000 }
     );
   } else {
     loadWeather(FALLBACK.lat, FALLBACK.lon, FALLBACK.name);
   }
+}
 
-});
+function startWeatherAfterIdle() {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(startWeather, { timeout: 1500 });
+  } else {
+    setTimeout(startWeather, 400);
+  }
+}
+
+window.addEventListener('load', startWeatherAfterIdle, { once: true });
 </script>
 
 
