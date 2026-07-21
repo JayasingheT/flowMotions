@@ -1364,6 +1364,177 @@ font-size:28px;
 }
 
 
+/* ============================================
+   MOBILE OPTIMIZATION PASS
+   ============================================ */
+@media(max-width:768px){
+
+  /* ===== Hero ===== */
+  .glass-hero{
+    max-width:92%;
+    padding:40px 22px;
+    border-radius:24px;
+  }
+  .glass-hero .display-1{
+    font-size:1.9rem;
+    letter-spacing:-1px;
+  }
+  .glass-hero .display-4{
+    font-size:15px;
+    line-height:1.5;
+  }
+
+  /* ===== All glass sections ===== */
+  .glass-section{
+    padding:35px 20px;
+    margin:40px auto;
+    border-radius:24px;
+    width:92%;
+  }
+
+  /* ===== Navbar ===== */
+  #menu-5-vhtKfx4bVu .container{
+    border-radius:24px;
+    padding:8px 16px;
+  }
+  #menu-5-vhtKfx4bVu .navbar-caption{
+    font-size:20px;
+  }
+  .navbar-collapse{
+    background:rgba(15,15,15,.92);
+    backdrop-filter:blur(20px);
+    border-radius:18px;
+    padding:15px;
+    margin-top:10px;
+  }
+
+  /* ===== Weather heading ===== */
+  .weather-heading h2{
+    font-size:34px;
+  }
+  .weather-heading span{
+    font-size:11px;
+    letter-spacing:5px;
+  }
+  .flight-status{
+    font-size:14px;
+    padding:16px 18px;
+  }
+
+  /* ===== Golden hour card ===== */
+  .golden-card{
+    padding:20px;
+  }
+
+  /* ===== Flight stats ===== */
+  .flight-title{
+    font-size:32px;
+  }
+  .flight-desc{
+    font-size:14px;
+    margin-bottom:30px;
+  }
+  .flight-card{
+    padding:22px 14px;
+  }
+  .flight-card h3{
+    font-size:26px;
+  }
+  .flight-icon{
+    font-size:32px;
+  }
+
+  /* ===== Gallery heading ===== */
+  #gallery01-8 h3 em{
+    font-size:38px !important;
+  }
+  #gallery01-8 .mbr-section-subtitle{
+    font-size:14px;
+  }
+
+  /* ===== Captured Moments marquee ===== */
+  #gallery07-6 .mbr-section-title em{
+    font-size:26px;
+  }
+  .grid-item img{
+    height:180px;
+    object-fit:cover;
+  }
+
+  /* ===== About section ===== */
+  .article4 .image-wrapper{
+    margin-bottom:25px;
+  }
+  .article4 .text-wrapper h1{
+    font-size:30px;
+  }
+  .article4 .text-wrapper p{
+    font-size:15px;
+  }
+
+  /* ===== Social section ===== */
+  .social-heading h2{
+    font-size:36px;
+  }
+  .social-heading p{
+    font-size:15px;
+  }
+  .glass-card{
+    height:auto;
+    padding:18px 20px;
+  }
+  .icon{
+    font-size:34px;
+    margin-right:16px;
+  }
+  .text h3{
+    font-size:20px;
+  }
+  .text p{
+    font-size:14px;
+  }
+
+  /* ===== Footer ===== */
+  #footer-5-vhtKfx7h3N .copyright{
+    font-size:13px;
+    line-height:1.6;
+  }
+
+  /* ===== Gallery modal (lightbox) tighter on mobile ===== */
+  #vnwmRFEIcv-modal .modal-content{
+    width:100% !important;
+  }
+  #vnwmRFEIcv-modal .carousel-control-prev,
+  #vnwmRFEIcv-modal .carousel-control-next{
+    width:44px !important;
+  }
+
+  /* ===== Reduce blur intensity for phone GPUs (perf) ===== */
+  .glass-hero,
+  .glass-section,
+  .glass-social,
+  .flight-card,
+  .golden-card{
+    backdrop-filter:blur(14px) !important;
+    -webkit-backdrop-filter:blur(14px) !important;
+  }
+
+  /* ===== Disable heavy hover-only effects on touch (they can stick after tap) ===== */
+  .item-wrapper:hover img{
+    transform:none;
+  }
+  .article4 .image-wrapper:hover img{
+    transform:none;
+  }
+}
+
+/* ===== Kill mouse-follow glow + dodge-text on touch devices entirely ===== */
+@media(hover:none) and (pointer:coarse){
+  body::before{
+    display:none !important;
+  }
+}
+
 
 
 
@@ -1521,6 +1692,9 @@ font-size:28px;
     </div>
 
 </div>
+
+
+
 </section>
 
 
@@ -1775,13 +1949,13 @@ font-size:28px;
 
         <div class="flight-card">
             <div class="flight-icon">✈️</div>
-            <h3 class="counter" data-target="147">0</h3>
+            <h3 class="counter" data-target="36">0</h3>
             <p>Total Flights</p>
         </div>
 
         <div class="flight-card">
             <div class="flight-icon">⏱️</div>
-            <h3 class="counter" data-target="132">0</h3>
+            <h3 class="counter" data-target="58">0</h3>
             <p>Flight Hours</p>
         </div>
 
@@ -1885,7 +2059,7 @@ class="glass-card youtube">
 <div class="container glass-section">
 <div class="row">
 <div class="col-12 col-lg-6 center mt-2 mb-3">
-<p class="mbr-fonts-style copyright mb-0 display-8">Sri Lanka<br/><br/>© 2026 Flowmotions.lk | Founded by Theekshana Jayasinghe (Jayasinghe404)<br/><br/></p>
+<p class="mbr-fonts-style copyright mb-0 display-8">Sri Lanka<br>© 2026 Flowmotions.lk | Founded by Theekshana Jayasinghe (Jayasinghe404)<br><br>Insured equipments<br>Registered equipments under Civil Aviation Authority ,Sri Lanka<br>NVQ - certified responsible Drone pilot</p>
 </div>
 </div>
 </div>
@@ -2049,10 +2223,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const FALLBACK = { lat: 6.9271, lon: 79.8612, name: "Colombo, Sri Lanka" };
 
 function loadWeather(lat, lon, locationName){
-
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,precipitation_probability,cloud_cover&daily=sunrise,sunset&timezone=auto&models=ecmwf_ifs025`;
-
-    fetch(url)
+const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,precipitation_probability,cloud_cover&daily=sunrise,sunset&timezone=auto&models=ecmwf_ifs025&wind_speed_unit=ms`;    fetch(url)
     .then(res => res.json())
     .then(data => {
 
@@ -2060,7 +2231,7 @@ function loadWeather(lat, lon, locationName){
 
         document.getElementById("weather-location").textContent = locationName;
         document.getElementById("w-temp").textContent = `${Math.round(c.temperature_2m)}°C`;
-        document.getElementById("w-wind").textContent = `${Math.round(c.wind_speed_10m)} m/s`;
+        document.getElementById("w-wind").textContent = `${c.wind_speed_10m.toFixed(1)} m/s`;
         document.getElementById("w-rain").textContent = `${c.precipitation_probability ?? 0}%`;
         document.getElementById("w-cloud").textContent = `${c.cloud_cover ?? 0}%`;
 
@@ -2136,23 +2307,22 @@ function loadWeather(lat, lon, locationName){
 
 }
 
-  function updateFlightStatus(wind, rainChance, cloud){
-    const statusEl = document.getElementById("flight-status");
-    const textEl = document.getElementById("flight-status-text");
+ function updateFlightStatus(wind, rainChance, cloud){
+  const statusEl = document.getElementById("flight-status");
+  const textEl = document.getElementById("flight-status-text");
 
-    // Common drone flying thresholds (adjust to your drone's specs)
-    // Most consumer drones: safe below ~25-30 km/h wind, avoid rain entirely
-    if(rainChance > 40 || wind > 35){
-      statusEl.className = "flight-status bad";
-      textEl.textContent = "⚠️ Not Recommended for Flying";
-    } else if(wind > 20 || rainChance > 15 || cloud > 80){
-      statusEl.className = "flight-status caution";
-      textEl.textContent = "⚠️ Caution — Marginal Conditions";
-    } else {
-      statusEl.className = "flight-status good";
-      textEl.textContent = "✅ Good Conditions for Flying";
-    }
+  // Thresholds now in m/s (35 km/h ≈ 9.7 m/s, 20 km/h ≈ 5.6 m/s)
+  if(rainChance > 65 || wind > 10.0){
+    statusEl.className = "flight-status bad";
+    textEl.textContent = "⚠️ Not Recommended for Flying";
+  } else if(wind > 8.0 || rainChance > 40 || cloud > 75){
+    statusEl.className = "flight-status caution";
+    textEl.textContent = "⚠️ Caution — Marginal Conditions  (Keep your VlOS in mind)";
+  } else {
+    statusEl.className = "flight-status good";
+    textEl.textContent = "✅ Good Conditions for Flying  (Keep your VlOS in mind)";
   }
+}
 
   // Try browser geolocation first, fall back to Colombo
   if(navigator.geolocation){
@@ -2221,7 +2391,28 @@ counters.forEach(counter=>observer.observe(counter));
 
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function(){
 
+  const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+  if(isTouchDevice){
+
+    // Hide the cursor-follow glow completely on touch devices
+    const style = document.createElement("style");
+    style.textContent = `body::before{ display:none !important; }`;
+    document.head.appendChild(style);
+
+    // Reset the "dodge" title effect so it doesn't get stuck off-position
+    const dodgeTitle = document.querySelector("#gallery07-6 .mbr-section-title");
+    if(dodgeTitle){
+      dodgeTitle.style.transform = "translate(0,0)";
+    }
+
+  }
+
+});
+</script>
 
 
 
