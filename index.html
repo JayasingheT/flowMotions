@@ -844,7 +844,7 @@ transform:translateY(0);
     
 }
 
-
+/*
 #vnwmRFEIcv-modal .modal-dialog{
   max-width:100vw !important;
   width:100vw !important;
@@ -865,6 +865,7 @@ transform:translateY(0);
   justify-content:center !important;
   background:transparent !important;
 }
+  
 #vnwmRFEIcv-modal .carousel-control-prev{
   left:0px !important;
   background:transparent !important;
@@ -874,20 +875,12 @@ transform:translateY(0);
   right:0px !important;
   background:transparent !important;
 }
+*/
 
 
 
 
-/* ===== Modal open/close animation ===== */
-#vnwmRFEIcv-modal .modal-dialog{
-  opacity:0;
-  transform:scale(0.92);
-  transition:opacity .35s ease, transform .35s ease;
-}
-#vnwmRFEIcv-modal.show .modal-dialog{
-  opacity:1;
-  transform:scale(1);
-}
+
 
 /* ===== Gallery thumbnail hover zoom ===== */
 .item-wrapper{
@@ -911,35 +904,6 @@ transform:translateY(0);
   transform:scale(1);
 }
 
-/* ===== Carousel arrows hover ===== */
-#vnwmRFEIcv-modal .carousel-control-prev-icon,
-#vnwmRFEIcv-modal .carousel-control-next-icon{
-  transition:transform .3s ease, opacity .3s ease;
-  opacity:0.6;
-}
-#vnwmRFEIcv-modal .carousel-control-prev:hover .carousel-control-prev-icon{
-  transform:translateX(-6px);
-  opacity:1;
-}
-#vnwmRFEIcv-modal .carousel-control-next:hover .carousel-control-next-icon{
-  transform:translateX(6px);
-  opacity:1;
-}
-
-/* ===== Close button hover ===== */
-#vnwmRFEIcv-modal .close{
-  transition:transform .35s ease, opacity .3s ease;
-  opacity:0.7;
-}
-#vnwmRFEIcv-modal .close:hover{
-  transform:rotate(90deg) scale(1.15);
-  opacity:1;
-}
-
-/* ===== Carousel slide fade (smoother than default) ===== */
-#vnwmRFEIcv-modal .carousel-item{
-  transition:opacity 1s ease-in-out !important;
-}
 
 /* ===== Nav links underline slide (you already have this, adding a subtle nav shadow lift) ===== */
 #menu-5-vhtKfx4bVu .navbar-brand a{
@@ -1649,8 +1613,144 @@ font-size:28px;
     opacity:.8;
 }
 
+img{
+    user-select:none;
+    -webkit-user-drag:none;
+}
+/* Gallery desktop fix */
 
+#vnwmRFEIcv-modal .modal-dialog{
+    max-width:none;
+    width:100%;
+    height:100vh;
+    margin:0;
+}
 
+#vnwmRFEIcv-modal .modal-content{
+    background:transparent;
+    border:0;
+}
+
+#vnwmRFEIcv-modal .modal-body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#vnwmRFEIcv-modal .carousel-item img{
+    width:auto !important;
+    height:auto !important;
+    max-width:90vw !important;
+    max-height:85vh !important;
+    object-fit:contain !important;
+}
+
+#vnwmRFEIcv-modal{
+    z-index:999999 !important;
+}
+
+#vnwmRFEIcv-modal .modal-dialog,
+#vnwmRFEIcv-modal .modal-content,
+#vnwmRFEIcv-modal .modal-body,
+#vnwmRFEIcv-modal .carousel{
+    pointer-events:auto !important;
+}
+
+#vnwmRFEIcv-modal .carousel-control-prev,
+#vnwmRFEIcv-modal .carousel-control-next{
+  position:fixed !important;
+  top:50% !important;
+  bottom:auto !important;
+  transform:translateY(-50%) !important;
+  width:60px !important;
+  height:60px !important;
+  background:transparent !important;
+  opacity:1 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  z-index:9999998 !important;
+}
+
+#vnwmRFEIcv-modal .carousel-control-prev{
+  left:15px !important;
+}
+
+#vnwmRFEIcv-modal .carousel-control-next{
+  right:15px !important;
+}
+
+#vnwmRFEIcv-modal.show .close{
+  opacity:1;
+  transform:scale(1) rotate(0deg);
+  transition-delay:.2s;
+}
+
+#vnwmRFEIcv-modal .close:hover{
+  background:rgba(255,255,255,.18);
+  box-shadow:0 0 20px rgba(255,255,255,.25);
+  transform:scale(1.15) rotate(90deg);
+}
+
+#vnwmRFEIcv-modal .close:active{
+  transform:scale(0.9) rotate(90deg);
+}
+#vnwmRFEIcv-modal .close{
+  position:fixed !important;
+  top:20px;
+  right:25px;
+  font-size:40px;
+  color:#fff;
+  z-index:9999999;
+  opacity:0;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:scale(0.7) rotate(-90deg);
+  transition:transform .4s cubic-bezier(0.34, 1.56, 0.64, 1),
+             opacity .4s ease,
+             background .3s ease,
+             box-shadow .3s ease;
+}
+
+#vnwmRFEIcv-modal.show .close{
+  opacity:1;
+  transform:scale(1) rotate(0deg);
+  transition-delay:.2s;
+}
+
+#vnwmRFEIcv-modal .close:hover{
+  background:rgba(255,255,255,.18);
+  box-shadow:0 0 20px rgba(255,255,255,.25);
+  transform:scale(1.15) rotate(90deg);
+}
+
+#vnwmRFEIcv-modal .close:active{
+  transform:scale(0.9) rotate(90deg);
+}
+#vnwmRFEIcv-modal .close:hover{
+  opacity:1;
+  transform:rotate(90deg) scale(1.15);
+}
+
+#vnwmRFEIcv-modal .carousel-control-prev,
+#vnwmRFEIcv-modal .carousel-control-next{
+  width:60px !important;
+  background:transparent !important;
+  opacity:1 !important;
+}
+#vnwmRFEIcv-modal .carousel-control-prev{
+  left:10px !important;
+}
+#vnwmRFEIcv-modal .carousel-control-next{
+  right:10px !important;
+}
 
 </style></head>
 <body id="top">
@@ -2003,6 +2103,8 @@ font-size:28px;
 <li data-bs-slide-to="7" data-bs-target="#lb-vnwmRFEIcv"></li><li data-bs-slide-to="8" data-bs-target="#lb-vnwmRFEIcv"></li><li data-bs-slide-to="9" data-bs-target="#lb-vnwmRFEIcv"></li><li data-bs-slide-to="10" data-bs-target="#lb-vnwmRFEIcv"></li><li data-bs-slide-to="11" data-bs-target="#lb-vnwmRFEIcv"></li>
 </ol>
 <a aria-label="Close" class="close" data-bs-dismiss="modal" href="" role="button">
+<span aria-hidden="true">&times;</span>
+</a>
 </a>
 <a class="carousel-control-prev carousel-control" data-bs-slide="prev" data-slide="prev" href="#lb-vnwmRFEIcv" role="button">
 <span aria-hidden="true" class="mobi-mbri mobi-mbri-arrow-prev"></span>
@@ -2048,7 +2150,7 @@ font-size:28px;
     <div class="bts-grid">
 
         <div class="bts-card">
-            <video controls preload="metadata" poster="assets/images/bts2.png" width="100%">
+            <video controls preload="metadata" controlsList="nodownload"disablePictureInPicture poster="assets/images/bts2.png" width="100%">
                 <source src="https://res.cloudinary.com/wrp6bt33/video/upload/v1784693526/bts2_ddq6md.mp4" type="video/mp4">
                 Your browser does not support the video tag.         <!--view behind the scenes content-->
             </video>
@@ -2058,7 +2160,7 @@ font-size:28px;
         </div>
 
         <div class="bts-card">
-            <video controls preload="metadata" poster="assets/images/bts1.png" width="100%">
+            <video controls preload="metadata" controlsList="nodownload"disablePictureInPicture poster="assets/images/bts1.png" width="100%">
                 <source src="https://res.cloudinary.com/wrp6bt33/video/upload/v1784693428/bts1_id8ljz.mp4" type="video/mp4">
                 Your browser does not support the video tag.         <!--view behind the scenes content-->
             </video>
@@ -2068,7 +2170,7 @@ font-size:28px;
         </div>
 
         <div class="bts-card">
-          <video controls preload="metadata" poster="assets/images/bend.png" width="100%">
+          <video controls preload="metadata" controlsList="nodownload"disablePictureInPicture poster="assets/images/bend.png" width="100%">
           <source src="https://res.cloudinary.com/wrp6bt33/video/upload/v1784693697/bend_fxm4mz.mp4" type="video/mp4">
           Your browser does not support HTML5 video.
           </video>
@@ -2252,7 +2354,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const style = document.createElement("style");
     style.textContent = `
-      body::before{ display:none !important; }
+      body::before{
+      display:none !important;
       .glass-hero, .glass-section, .glass-social, .flight-card, .golden-card{
         backdrop-filter:none !important;
         -webkit-backdrop-filter:none !important;
@@ -2613,9 +2716,62 @@ toggleBtsBtn.addEventListener("click", function () {
 });
 </script>
 
+<script>
+document.querySelectorAll("video").forEach(video => {
 
+    // Disable right click menu
+    video.addEventListener("contextmenu", function(e){
+        e.preventDefault();
+    });
 
+    // Remove download option
+    video.setAttribute("controlsList", "nodownload");
 
+    // Disable picture-in-picture
+    video.setAttribute("disablePictureInPicture", "");
+
+});
+</script>
+
+<script>
+document.addEventListener("contextmenu", function(e){
+
+    e.preventDefault();
+
+    const msg = document.createElement("div");
+
+    msg.innerHTML = "© Flowmotions.lk - Content Protected";
+
+    msg.style.position="fixed";
+    msg.style.bottom="30px";
+    msg.style.left="50%";
+    msg.style.transform="translateX(-50%)";
+    msg.style.background="rgba(0,0,0,.8)";
+    msg.style.color="white";
+    msg.style.padding="12px 25px";
+    msg.style.borderRadius="30px";
+    msg.style.zIndex="999999";
+    msg.style.backdropFilter="blur(10px)";
+
+    document.body.appendChild(msg);
+
+    setTimeout(()=>{
+        msg.remove();
+    },2000);
+
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.modal.mbr-slider').forEach(function (modal) {
+    modal.addEventListener('show.bs.modal', function () {
+      if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+    });
+  });
+});
+</script>
 
 </body>
 </html>
