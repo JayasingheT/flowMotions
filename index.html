@@ -4,6 +4,7 @@
 <head>
   <meta name="google-site-verification" content="vcNB2ekrt0d88tNezifN05sVceVccZGvPMyb8MnG2fQ" />
 <meta charset="utf-8"/>
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="Mobirise v6.1.12, mobirise.com" name="generator"/>
 <meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport"/><meta name="theme-color" content="#000000"/><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1047,10 +1048,19 @@ html{
 .article4 .image-wrapper img{
   transition:transform .6s ease, box-shadow .6s ease;
   border-radius:30px;
+  
 }
+
+.article4 .image-wrapper img{
+    width: 70%;
+    max-width: 75%;
+    height: 70%;
+    border-radius: 30px;
+}
+
 .article4 .image-wrapper:hover img{
-  transform:scale(1.03) rotate(-0.5deg);
-  box-shadow:0 25px 60px rgba(0,0,0,.4);
+  transform:scale(1.00) rotate(-0.5deg);
+  box-shadow:0 25px 60px rgba(254, 252, 252, 0.49);
 }
 .article4 .text-wrapper{
   transition:transform .3s ease;
@@ -1223,8 +1233,8 @@ html{
 
 .flight-card:hover{
     transform:translateY(-10px);
-    border-color:#ff5e00;
-    box-shadow:0 20px 50px rgba(255, 187, 0, 0.203);
+    border-color:#ffffff;
+    box-shadow:0 20px 50px rgb(255, 255, 255);
 }
 
 .flight-icon{
@@ -1535,6 +1545,110 @@ font-size:28px;
   }
 }
 
+.bts-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+    margin-top:35px;
+}
+
+.bts-card{
+
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:18px;
+
+    overflow:hidden;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+
+}
+
+.bts-card:hover{
+
+    transform:translateY(-10px) scale(1.02);
+
+    border-color:white;
+
+    box-shadow:
+        0 20px 50px rgba(255,255,255,.15);
+
+}
+.bts-card:hover{
+    transform:translateY(-8px);
+}
+
+.bts-card video{
+
+    width:100%;
+
+    height:240px;
+
+    object-fit:cover;
+
+    border-radius:16px;
+
+    transition:transform .5s ease;
+
+}
+.bts-card:hover video{
+
+    transform:scale(1.05);
+
+}
+
+.bts-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-150%;
+
+    top:0;
+
+    width:220%;
+
+    height:2px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        white,
+        transparent
+    );
+
+    animation:btsShine 6s linear infinite;
+
+}
+
+@keyframes btsShine{
+
+    from{
+        left:-150%;
+    }
+
+    to{
+        left:150%;
+    }
+
+}
+
+.bts-card h4{
+    margin-top:18px;
+}
+
+.bts-card p{
+    opacity:.8;
+}
+
 
 
 
@@ -1692,8 +1806,6 @@ font-size:28px;
     </div>
 
 </div>
-
-
 
 </section>
 
@@ -1914,11 +2026,70 @@ font-size:28px;
 </div>
 </div>
 </section>
+
+<section class="glass-section">
+
+    <h2 class="display-2 text-center">
+        🎬 Behind the Scenes
+    </h2>
+
+    <p class="text-center">
+        See how every aerial shot comes to life.
+    </p>
+
+    <div style="text-align:center;margin:30px 0;">
+        <button id="toggleBtsBtn" class="btn btn-success-outline">
+            ▶ View Behind the Scenes
+        </button>
+    </div>
+<!--view behind the scenes content-->
+    <div id="btsContent" style="display:none;">
+
+    <div class="bts-grid">
+
+        <div class="bts-card">
+            <video controls preload="metadata" poster="assets/images/bts2.png" width="100%">
+                <source src="https://res.cloudinary.com/wrp6bt33/video/upload/v1784693526/bts2_ddq6md.mp4" type="video/mp4">
+                Your browser does not support the video tag.         <!--view behind the scenes content-->
+            </video>
+
+            <h4>Flight Preparation</h4>
+            <p>Getting ready</p>
+        </div>
+
+        <div class="bts-card">
+            <video controls preload="metadata" poster="assets/images/bts1.png" width="100%">
+                <source src="https://res.cloudinary.com/wrp6bt33/video/upload/v1784693428/bts1_id8ljz.mp4" type="video/mp4">
+                Your browser does not support the video tag.         <!--view behind the scenes content-->
+            </video>
+
+            <h4>On Location</h4>
+            <p>Capturing cinematic aerial footage.</p>
+        </div>
+
+        <div class="bts-card">
+          <video controls preload="metadata" poster="assets/images/bend.png" width="100%">
+          <source src="https://res.cloudinary.com/wrp6bt33/video/upload/v1784693697/bend_fxm4mz.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+          </video>
+
+
+            <h4>Final Shot</h4>
+            <p>The concluding shot of the behind-the-scenes footage.</p>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
 <section class="article4 cid-vhtKfx5i6N" data-bs-version="5.1" id="about-us-4-vhtKfx5i6N">
 <div class="container glass-section">
 <div class="row justify-content-center">
 <div class="col-12 col-md-12 col-lg-6 image-wrapper">
-<a href="index.html#about-us-4-vhtKfx5i6N"><img loading="lazy" decoding="async" alt="Flowmotions" class="w-100" src="assets/images/photo-1603923407797-2d25dfbbb1a0.webp"/></a>
+<a href="index.html#about-us-4-vhtKfx5i6N"><img loading="lazy" decoding="async" alt="Flowmotions" class="w-100" src="assets/images/theekshana.jpg"/></a>
 </div>
 <div class="col-12 col-md-12 col-lg">
 <div class="text-wrapper align-left">
@@ -2420,6 +2591,27 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 
+
+<script>
+const toggleBtsBtn = document.getElementById("toggleBtsBtn");
+const btsContent = document.getElementById("btsContent");
+
+toggleBtsBtn.addEventListener("click", function () {
+
+    if (btsContent.style.display === "none") {
+
+        btsContent.style.display = "block";
+        toggleBtsBtn.innerHTML = "▼ Hide Behind the Scenes";
+
+    } else {
+
+        btsContent.style.display = "none";
+        toggleBtsBtn.innerHTML = "▶ View Behind the Scenes";
+
+    }
+
+});
+</script>
 
 
 
