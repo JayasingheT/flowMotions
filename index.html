@@ -1777,6 +1777,203 @@ img{
   right:10px !important;
 }
 
+
+
+/* =========================================
+   FLOWMOTIONS PHOTO DETAILS
+   ========================================= */
+
+.fm-info-button {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+
+    width: 230px;
+    height: 70px;
+
+    border-radius: 30%;
+    border: 1px solid rgba(255,255,255,.25);
+
+    background: rgba(255,255,255,.12);
+    color: #fff;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow: 0 8px 30px rgba(0,0,0,.4);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 99999999;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+.fm-info-button:hover {
+    transform: scale(1.08);
+    background: rgba(255,255,255,.22);
+}
+
+
+/* Details glass box */
+
+.fm-photo-details {
+    position: fixed;
+
+    left: 50%;
+    bottom: 25px;
+
+    width: min(430px, calc(100% - 40px));
+
+    padding: 20px 22px;
+
+    border-radius: 22px;
+
+    background: rgba(20,20,20,.48);
+
+    border: 1px solid rgba(255,255,255,.18);
+
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.12);
+
+    color: #fff;
+
+    z-index: 99999998;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform:
+        translate(-50%, 30px)
+        scale(.94);
+
+    transition:
+        opacity .35s cubic-bezier(.22,1,.36,1),
+        transform .35s cubic-bezier(.22,1,.36,1),
+        visibility .35s;
+}
+
+
+/* Open */
+
+.fm-photo-details.fm-show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform:
+        translate(-50%, 0)
+        scale(1);
+}
+
+
+/* Title */
+
+.fm-photo-details h3 {
+    margin: 0 0 8px;
+
+    color: #fff;
+
+    font-size: 21px;
+    font-weight: 600;
+}
+
+
+/* Description */
+
+.fm-photo-details p {
+    margin: 5px 0;
+
+    color: rgba(255,255,255,.82);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* Tags */
+
+.fm-photo-meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 12px;
+}
+
+.fm-photo-meta span {
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.10);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    color: rgba(255,255,255,.9);
+
+    font-size: 12px;
+}
+
+
+/* Mobile */
+
+@media (max-width:600px) {
+
+    .fm-info-button {
+        width: 44px;
+        height: 44px;
+
+        right: 15px;
+        bottom: 15px;
+
+        font-size: 20px;
+    }
+
+    .fm-photo-details {
+
+        width: calc(100% - 30px);
+
+        bottom: 15px;
+
+        padding: 17px 18px;
+
+        border-radius: 19px;
+    }
+
+    .fm-photo-details h3 {
+        font-size: 18px;
+    }
+
+    .fm-photo-details p {
+        font-size: 13px;
+    }
+
+    .fm-photo-meta span {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+}
+
+
+
+
+
+
 </style></head>
 <body id="top">
 <!-- Analytics -->
@@ -1788,7 +1985,6 @@ img{
   gtag('js', new Date());
 
   gtag('config', 'G-R07HFPCK7S');
-
 
 
 
@@ -2802,7 +2998,177 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const modal = document.getElementById("vnwmRFEIcv-modal");
+
+    if (!modal) return;
+
+    /* Create INFO button */
+    const infoButton = document.createElement("button");
+
+    infoButton.className = "fm-info-button";
+    infoButton.type = "button";
+    infoButton.setAttribute("aria-label", "Photo information");
+    infoButton.innerHTML = "ⓘ About this image";
+
+    /* Create details box */
+    const detailsBox = document.createElement("div");
+
+    detailsBox.className = "fm-photo-details";
+
+    detailsBox.innerHTML = `
+        <h3></h3>
+        <p></p>
+        <div class="fm-photo-meta"></div>
+    `;
+
+    modal.appendChild(infoButton);
+    modal.appendChild(detailsBox);
+
+
+    /* Photo information */
+    const photoDetails = [
+
+        {
+            title: "Lake",
+            description: "Where rugged cliffs meet emerald waters — nature painted from above.",
+            meta: ["🚁 DJI Air 3S", "📷 Aerial Photography","📍Homagama-Sri Lanka"]
+        },
+
+        {
+            title: "Samanalawewa Reservoir",
+            description: "A vast reservoir winding through the emerald mountains of Sri Lanka.",
+            meta: ["🚁 DJI Air 3S", "🎥 Cinematic","📍Belihuloya-Sri Lanka"]
+        },
+
+        {
+            title: "Sunset",
+            description: "A fiery sunset breaking through the storm above the city skyline.",
+            meta: ["🚁 DJI Air 3S", "🌅 Sunset","📍Colombo-Sri Lanka"]
+        },
+
+        {
+            title: "Field",
+            description: "A tapestry of green and gold, shaped by the hills and cultivated by hand.",
+            meta: ["🚁 DJI Air 3S", "📷 Aerial Photography","📍Belihuloya-Sri Lanka"]
+        },
+
+        {
+            title: "Samanalawewa Reservoir",
+            description: "Where clouds drift between the mountains and the reservoir below.",
+            meta: ["🚁 DJI Air 3S", "🌄 Landscape","📍Belihuloya-Sri Lanka"]
+        },
+
+        {
+            title: "Mountain layers",
+            description: "Golden light rising over a sea of mist-covered mountains.",
+            meta: ["🚁 DJI Air 3S", "🏔️ Landscape","📍Belihuloya-Sri Lanka"]
+        },
+
+        {
+            title: "Red giant ",
+            description: "A crimson sun sinking behind the silent city.",
+            meta: ["🚁 DJI Air 3S", "🌅 Golden Hour","📍Colombo-Sri Lanka"]
+        },
+
+        {
+            title: "Morning",
+            description: "Morning aerial view captured over the landscape.",
+            meta: ["🚁 DJI Air 3S", "☀️ Morning","📍Sooriyakanda-Sri Lanka"]
+        },
+
+        {
+            title: "Thunderstorm Outfllow",
+            description: "Natural weather incident.",
+            meta: ["🚁 DJI Air 3S", "📷 Aerial","📍Homagama-Sri Lanka"]
+        },
+
+        {
+            title: "Curved road over field",
+            description: "A winding road through a golden tapestry of rice fields and tropical hills.",
+            meta: ["🚁 DJI Air 3S", "🛩️ Aerial","📍Belihuloya-Sri Lanka"]
+        },
+
+        {
+            title: "Lake gregory",
+            description: "A golden sunset reflected across the quiet waters beneath the mountain horizon.",
+            meta: ["🚁 DJI Air 3S", "🏔️ Landscape","📍Nuwara eliya-Sri Lanka"]
+        },
+
+        {
+            title: "Bird's Eye View",
+            description: "A hidden retreat nestled deep within the emerald forest.",
+            meta: ["🚁 DJI Air 3S", "📷 Aerial Photography","📍Belihuloya-Sri Lanka"]
+        }
+
+    ];
+
+
+    function getCurrentIndex() {
+
+        const active = modal.querySelector(".carousel-item.active");
+
+        if (!active) return 0;
+
+        const items = Array.from(
+            modal.querySelectorAll(".carousel-item")
+        );
+
+        return items.indexOf(active);
+    }
+
+
+    function updateDetails() {
+
+        const index = getCurrentIndex();
+
+        const data = photoDetails[index];
+
+        if (!data) return;
+
+        detailsBox.querySelector("h3").textContent = data.title;
+
+        detailsBox.querySelector("p").textContent = data.description;
+
+        detailsBox.querySelector(".fm-photo-meta").innerHTML =
+            data.meta.map(item => `<span>${item}</span>`).join("");
+    }
+
+
+    /* Show / hide details */
+    infoButton.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        detailsBox.classList.toggle("fm-show");
+
+    });
+
+
+    /* Update when changing image */
+    modal.addEventListener("slid.bs.carousel", function () {
+
+        updateDetails();
+
+        detailsBox.classList.remove("fm-show");
+
+    });
+
+
+    /* When lightbox opens */
+    modal.addEventListener("shown.bs.modal", function () {
+
+        updateDetails();
+
+        detailsBox.classList.remove("fm-show");
+
+    });
+
+});
+</script>
+
 
 </body>
 </html>
-
